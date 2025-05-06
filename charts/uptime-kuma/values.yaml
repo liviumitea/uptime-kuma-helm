@@ -48,12 +48,16 @@ securityContext:
   # runAsNonRoot: true
   # runAsUser: 1000
 
-type: LoadBalancer
-ports:
+service:
+  type: LoadBalancer
+  # replace “port:” with a list
+  ports:
     - name: http
       protocol: TCP
-      port: 80
+      port: 3001
       targetPort: 3001
+      # optional: nodePort: 32001
+  annotations: {}
 
 ingress:
   enabled: false
