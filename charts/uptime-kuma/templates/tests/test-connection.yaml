@@ -8,9 +8,12 @@ metadata:
   annotations:
     "helm.sh/hook": test
 spec:
+  restartPolicy: Never
   containers:
     - name: wget
       image: busybox
-      command: ['wget']
-      args: ['{{ include "uptime-kuma.fullname" . }}:{{ .Values.type.ports.port }}']
-  restartPolicy: Never
+      # run 'wget -qO- http://<svc-name>:<port>' and exit non-zero if not 200
+      command: ["wget"]
+      args:
+        - "-qO-"
+        - "http://{{ include "uptime-kuma.fullname" . }}:{{ (index .Values.service.ports 0).port }}"
