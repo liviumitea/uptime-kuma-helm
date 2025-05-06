@@ -12,7 +12,6 @@ spec:
   containers:
     - name: wget
       image: busybox
-      # run 'wget -qO- http://<svc-name>:<port>' and exit non-zero if not 200
       command: ["wget"]
       args:
         - "-qO-"
