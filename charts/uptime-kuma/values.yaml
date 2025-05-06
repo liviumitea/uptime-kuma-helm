@@ -48,11 +48,12 @@ securityContext:
   # runAsNonRoot: true
   # runAsUser: 1000
 
-service:
-  type: ClusterIP
-  port: 3001
-  nodePort:
-  annotations: {}
+type: LoadBalancer
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 3001
 
 ingress:
   enabled: false
@@ -146,7 +147,7 @@ volume:
   # line and define the storage class name
   # storageClassName:
   # Reuse your own pre-existing PVC.
-  existingClaim: ""
+  existingClaim: "uptime-kuma-pvc"
 
 # -- A list of additional volumes to be added to the pod
 additionalVolumes:
