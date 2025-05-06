@@ -12,5 +12,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "uptime-kuma.fullname" . }}:{{ .Values.service.port }}']
+      args: ['{{ include "uptime-kuma.fullname" . }}:{{ .Values.type.ports.port }}']
   restartPolicy: Never
